@@ -122,6 +122,14 @@ class Filesystem(object):
         except IOError:
             return False
 
+    def getsize(self, path):
+        """
+        Returns the size of a file.
+        """
+        if not self.isfile(path):
+            raise IOError("not a file")
+        return self._find_descr_for_path(path)[1]
+
     def _find_descr_for_path(self, path):
         """
         Returns the descriptor for a specified path.
