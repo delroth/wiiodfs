@@ -82,23 +82,50 @@ class Filesystem(object):
         """
         Opens the provided path and returns a file-like object.
         """
-        root = self.tree
-        for comp in path.split('/'):
-            if comp == '':
-                continue
-            if comp not in root:
-                raise IOError("file not found")
-            root = root[comp]
-
-        if isinstance(root, dict):
+        if not self.isfile(path):
             raise IOError("is a directory")
-
-        return _File(self.part, *root)
+        return _File(self.part, *self._find_descr_for_path(path))
 
     def listdir(self, path):
         """
         Lists the provided path and return a list of the direct child names.
         """
+        if not self.isdir(path):
+            raise IOError("not a directory")
+        return self._find_descr_for_path(path).keys()
+
+    def isfile(self, path):
+        """
+        Checks if the provided path is a file.
+        """
+        try:
+            return isinstance(self._find_descr_for_path(path), tuple)
+        except IOError:
+            return False
+
+    def isdir(self, path):
+        """
+        Checks if the provided path is a directory.
+        """
+        try:
+            return isinstance(self._find_descr_for_path(path), dict)
+        except IOError:
+            return False
+
+    def exists(self, path):
+        """
+        Checks if a path exists on the filesystem.
+        """
+        try:
+            self._find_descr_for_path(path)
+            return True
+        except IOError:
+            return False
+
+    def _find_descr_for_path(self, path):
+        """
+        Returns the descriptor for a specified path.
+        """
         root = self.tree
         for comp in path.split('/'):
             if comp == '':
@@ -106,11 +133,7 @@ class Filesystem(object):
             if comp not in root:
                 raise IOError("file not found")
             root = root[comp]
-
-        if isinstance(root, tuple):
-            raise IOError("not a directory")
-
-        return root.keys()
+        return root
 
     def _build_tree(self):
         """
