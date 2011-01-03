@@ -81,9 +81,9 @@ class WiiODFS(FS):
     def getinfo(self, path):
         path = normpath(path)
         if self.fs.isdir(path):
-            return { 'st_mode': 0555 | stat.s_IFDIR }
+            return { 'st_mode': 0555 | stat.S_IFDIR }
         elif self.fs.isfile(path):
-            return { 'st_mode': 0444 | stat.s_IFREG,
+            return { 'st_mode': 0444 | stat.S_IFREG,
                      'size': self.fs.getsize(path) }
         else:
             raise ResourceNotFoundError(path)
