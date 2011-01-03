@@ -68,6 +68,9 @@ class _File(object):
         self.pos += actual_size
         return data
 
+    def flush(self):
+        pass
+
 class Filesystem(object):
     def __init__(self, part):
         """
