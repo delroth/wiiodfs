@@ -6,9 +6,9 @@ Mount your Wii disc images on a local directory using the FUSE API.
 1. How to use
 =============
 
-$ ./wodmount --help
+$ ./wiiodmount --help
 
-You can also install wodmount on your system using distutils:
+You can also install wiiodmount on your system using distutils:
 
 $ python2 setup.py install
 
@@ -21,13 +21,13 @@ $ python2 setup.py install
 3. Use the wod library
 ======================
 
-wod is also a Python 2.x package you can use in your applications. There are
+wiiod is also a Python 2.x package you can use in your applications. There are
 several layers you can use, from the lowest level to the highest level:
 
-* wod.disc: disc image access, partition table, game metadata.
-* wod.partition: crypted partition access, DOL/bootloader/FS raw access.
-* wod.wodfs: "high level" API to access files on WOD partitions.
-* wod.fs: a PyFS filesystem using wod.wodfs. Recommanded for most usages.
+* wiiod.disc: disc image access, partition table, game metadata.
+* wiiod.partition: crypted partition access, DOL/bootloader/FS raw access.
+* wiiod.wiiodfs: "high level" API to access files on WOD partitions.
+* wiiod.fs: a PyFS filesystem using wiiod.wiiodfs.
 
 4. Authors
 ==========
