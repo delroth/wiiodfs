@@ -1,0 +1,56 @@
+Wii Optical Disc FS
+~~~~~~~~~~~~~~~~~~~
+
+Mount your Wii disc images on a local directory using the FUSE API.
+
+1. How to use
+=============
+
+$ ./wodmount --help
+
+You can also install wodmount on your system using distutils:
+
+$ python2 setup.py install
+
+2. Dependencies
+===============
+
+* PyCrypto (needed for AES computations)
+* PyFS (used to expose the FS with FUSE)
+
+3. Use the wod library
+======================
+
+wod is also a Python 2.x package you can use in your applications. There are
+several layers you can use, from the lowest level to the highest level:
+
+* wod.disc: disc image access, partition table, game metadata.
+* wod.partition: crypted partition access, DOL/bootloader/FS raw access.
+* wod.wodfs: "high level" API to access files on WOD partitions.
+* wod.fs: a PyFS filesystem using wod.wodfs. Recommanded for most usages.
+
+4. Authors
+==========
+
+See AUTHORS.
+
+5. Thanks
+=========
+
+* Wiibrew, a great wiki about Wii homebrews with a lot of documentation
+  http://wiibrew.org
+
+* Yet Another Gamecube Documentation
+  http://hitmen.c02.at/files/yagcd/yagcd/index.html
+
+* The Dolphin emulator team
+  http://www.dolphin-emulator.com/
+
+* Segher Boessenkool for his Wii tools
+  http://git.infradead.org/users/segher/wii.git
+
+* PyCrypto authors for their great library (but please, Py3k support!)
+  http://www.dlitz.net/software/pycrypto/
+
+* The PyFS authors and contributors
+  http://code.google.com/p/pyfilesystem/
